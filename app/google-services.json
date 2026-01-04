@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "996097109136",
+    "project_id": "waterminder-7dcf5",
+    "storage_bucket": "waterminder-7dcf5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996097109136:android:3df3bb220b3eebf9587c15",
+        "android_client_info": {
+          "package_name": "com.example.waterminder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjFhT8_80e_N_2bi4Gum4Vnl74JHQWIXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
