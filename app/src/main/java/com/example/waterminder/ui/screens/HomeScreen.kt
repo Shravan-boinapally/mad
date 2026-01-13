@@ -33,12 +33,12 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.waterminder.api.TipsApi
 import com.example.waterminder.db.dao.UserDAO
 import com.example.waterminder.db.entity.UserEntity
 import com.example.waterminder.db.entity.WaterIntakeEntity
 import com.example.waterminder.db.entity.WaterLogEntity
 import com.example.waterminder.db.modules.DatabaseModule
-import com.google.firebase.logger.Logger
 import kotlinx.coroutines.launch
 
 
@@ -66,25 +66,21 @@ fun HomeScreen(
 
     var showLogoutDialog by remember { mutableStateOf(false) }
 
-    val hydrationTips = listOf(
-        "Drink a glass of water right after waking up 🌅",
-        "Carry a water bottle wherever you go 💧",
-        "Sip water every 30–60 minutes ⏰",
-        "Drink water before meals 🍽️",
-        "If you feel tired, drink water first 😴",
-        "Increase water intake during hot weather ☀️",
-        "Drink more water when exercising 🏃‍♂️",
-        "Don’t wait until you feel thirsty 🚫"
-    )
-
     var currentTip by remember {
-        mutableStateOf(hydrationTips.random())
+        mutableStateOf("Loading hydration tip...")
     }
 
+    // Fetch tips from API
     LaunchedEffect(Unit) {
+        val tipsApi = TipsApi.create()
         while (true) {
-            currentTip = hydrationTips.random()
-            kotlinx.coroutines.delay(1000)
+            try {
+                val response = tipsApi.getRandomTip()
+                currentTip = response.slip.advice
+            } catch (e: Exception) {
+                currentTip = "Stay hydrated! Drink water throughout the day."
+            }
+            kotlinx.coroutines.delay(15000) // Update tip every 15 seconds
         }
     }
 

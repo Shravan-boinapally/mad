@@ -13,7 +13,9 @@ object DatabaseModule {
                 context.applicationContext,
                 AppDatabase::class.java,
                 "waterminder_db"
-            ).build()
+            )
+                .fallbackToDestructiveMigration()
+                .build()
         }
         return INSTANCE!!
     }
